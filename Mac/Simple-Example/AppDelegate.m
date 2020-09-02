@@ -67,7 +67,7 @@
 
 - (KSCrashInstallation *)makeDbyServerInstallation {
     
-    NSString *url = @"http://data-center-dev.duobeiyun.com/collect-event";
+    NSString *url = @"https://data-center.duobeiyun.net/collect-event";
     KSCrashInstallationDbyServer *dby = [KSCrashInstallationDbyServer sharedInstance];
     dby.url = url;
     return dby;

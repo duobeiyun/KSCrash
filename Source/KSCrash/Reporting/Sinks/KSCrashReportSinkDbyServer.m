@@ -32,13 +32,17 @@
 - (void) filterReports:(NSArray*) reports
           onCompletion:(KSCrashReportFilterCompletion) onCompletion
 {
-    //开始上传文件
+    
+    if (!reports.count) {
+        kscrash_callCompletion(onCompletion, reports, YES, nil);
+        return;
+    }
+    //开始上传崩溃日志
     NSDictionary *params = @{@"type":@"custom",
                              @"info":@{
-                                     @"crash":reports
+                                     @"crash_log":reports
                              }
     };
-    
     NSError *tojson_error;
     NSData *crash_data = [NSJSONSerialization dataWithJSONObject:params options:0 error:&tojson_error];
     if (tojson_error) {
@@ -60,7 +64,6 @@
     }];
     [task resume];
 }
-
 
 
 - (id)defaultCrashReportFilterSetAppleFmt {
