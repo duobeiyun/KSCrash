@@ -14,6 +14,7 @@
 #import <KSCrash/KSCrashInstallationQuincyHockey.h>
 #import <KSCrash/KSCrashInstallationEmail.h>
 #import <KSCrash/KSCrashInstallationVictory.h>
+#import <KSCrash/KSCrashInstallationDbyServer.h>
 
 @implementation AppDelegate
 
@@ -36,7 +37,7 @@
 {
     // Create an installation (choose one)
 //    KSCrashInstallation* installation = [self makeStandardInstallation];
-    KSCrashInstallation* installation = [self makeEmailInstallation];
+    KSCrashInstallation* installation = [self makeDbyServerInstallation];
 //    KSCrashInstallation* installation = [self makeHockeyInstallation];
 //    KSCrashInstallation* installation = [self makeQuincyInstallation];
 //    KSCrashInstallation *installation = [self makeVictoryInstallation];
@@ -62,6 +63,16 @@
          }
      }];
 }
+
+
+- (KSCrashInstallation *)makeDbyServerInstallation {
+    
+    NSString *url = @"http://data-center-dev.duobeiyun.com/collect-event";
+    KSCrashInstallationDbyServer *dby = [KSCrashInstallationDbyServer sharedInstance];
+    dby.url = url;
+    return dby;
+}
+
 
 - (KSCrashInstallation*) makeEmailInstallation
 {
