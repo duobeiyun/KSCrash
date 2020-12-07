@@ -14,6 +14,7 @@
 #import <KSCrash/KSCrashInstallationQuincyHockey.h>
 #import <KSCrash/KSCrashInstallationEmail.h>
 #import <KSCrash/KSCrashInstallationVictory.h>
+#import <KSCrash/KSCrashInstallationFile.h>
 
 @implementation AppDelegate
 
@@ -36,7 +37,7 @@
 {
     // Create an installation (choose one)
 //    KSCrashInstallation* installation = [self makeStandardInstallation];
-    KSCrashInstallation* installation = [self makeEmailInstallation];
+    KSCrashInstallation* installation = [self makeFileInstallation];
 //    KSCrashInstallation* installation = [self makeHockeyInstallation];
 //    KSCrashInstallation* installation = [self makeQuincyInstallation];
 //    KSCrashInstallation *installation = [self makeVictoryInstallation];
@@ -62,6 +63,18 @@
          }
      }];
 }
+
+- (KSCrashInstallation *)makeFileInstallation {
+    
+    KSCrashInstallationFile *file = [KSCrashInstallationFile sharedInstance];
+    NSString *fileDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Document/RZCrashLogs"];
+    NSLog(@"dir = %@",fileDir);
+    file.fileDir = fileDir;
+    return file;
+}
+
+
+
 
 - (KSCrashInstallation*) makeEmailInstallation
 {
